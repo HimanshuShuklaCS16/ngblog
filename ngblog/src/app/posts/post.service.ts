@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 })
 export class PostService {
 postsCollection:AngularFirestoreCollection<Post>
+postdoc:AngularFirestoreDocument<Post>
   constructor(private afs:AngularFirestore) {
 this.postsCollection=this.afs.collection('posts',ref=>
 ref.orderBy('published','desc'))
@@ -21,5 +22,18 @@ ref.orderBy('published','desc'))
         return {id,...data}
       })
     })
+  }
+  getPostData(){
+    this.postdoc=this.afs.doc<Post>('posts/${id}')
+    return this.postdoc.valuechanges();
+  }
+  create(data:Post){
+    this.postsCollection.add(data);
+  }
+  delete(id:string){
+    return this.getPost(id).delete();
+  }
+  update(id:string,formData){
+    return this.getPost(id).update(formData);
   }
 }

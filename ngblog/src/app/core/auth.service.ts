@@ -5,8 +5,16 @@ import * as firebase from 'firebase/app';
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(public afAuth:AngularFireAuth) {}
+authstate:any=null
+  constructor(public afAuth:AngularFireAuth) {
+    this.afAuth.authstate.subscribe(data=>this.authstate=data)
+  }
+  get Authenticated():boolean{
+    return this.authstate!==null
+  }
+  get currentUserId():string{
+    return this.Authenticated ? this.authstate.uid : null
+  }
 login(){
   this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 }
