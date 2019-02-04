@@ -5,18 +5,18 @@ import * as firebase from 'firebase/app';
   providedIn: 'root'
 })
 export class AuthService {
-authstate:any=null
+authState:any=null
   constructor(public afAuth:AngularFireAuth) {
-    this.afAuth.authstate.subscribe(data=>this.authstate=data)
+    this.afAuth.authState.subscribe(data=>this.authState=data)
   }
   get Authenticated():boolean{
-    return this.authstate!==null
+    return this.authState!==null
   }
   get currentUserId():string{
-    return this.Authenticated ? this.authstate.uid : null
+    return this.Authenticated ? this.authState.uid : null
   }
 login(){
-  this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 }
 logout(){
   this.afAuth.auth.signOut();

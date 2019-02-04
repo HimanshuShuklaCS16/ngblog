@@ -1,8 +1,8 @@
 export class Post{
-  title:String
-  id:string
-  description:String
+  title:string
+  id?: string
+  description:string
   published:Date
-  authorId:String
-  image:String
+  authorId:string
+  image:string
 }

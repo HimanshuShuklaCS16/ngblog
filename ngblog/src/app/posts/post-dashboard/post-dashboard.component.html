@@ -16,11 +16,17 @@
               <img [src]="image || '//:0' ">
             </div>
 
-<mat-form-field>
-  <input matInput placeholder="write a post" value="" [ngModel]="title">
-  <textarea matInput placeholder="textarea" [ngModel]="content"></textarea>
-  </mat-form-field>
-<button mat-raised-button color="primary" (click)="createPost()" disabled="!title||!content">{{buttontext}}</button>
+            <mat-form-field>
+                    <input matInput placeholder="Post title" [(ngModel)]="title" name="title">
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Post content" [(ngModel)]="content" name="content" rows="10"></textarea>
+                  </mat-form-field>
+                  <br>
+                  <button mat-raised-button (click)="createPost()" color="accent" [disabled]="!title || !content || !image">{{saving}}</button>
+
+
 </mat-expansion-panel>
     </mat-accordion>
   </section>
